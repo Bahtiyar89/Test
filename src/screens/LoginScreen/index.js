@@ -1,127 +1,68 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useContext, useState} from 'react';
 import {
-  View,
   Text,
   SafeAreaView,
-  TextInput,
+  Dimensions,
   TouchableOpacity,
+  ImageBackground,
+  View,
 } from 'react-native';
-import AppBarLogin from '../../components/AppBarLogin';
+import TextSvg from '../../assets/TextSvg';
+import AuthContext from '../../context/auth/AuthContext';
 
 const LoginScreen = ({navigation}) => {
-  const [walletKeys, seTwalletKeys] = useState({
-    sk: '',
-    pk: '',
-  });
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
+  const authContext = useContext(AuthContext);
+  const {signin} = authContext;
   return (
     <Fragment>
-      <AppBarLogin />
+      <ImageBackground
+        source={require('../../assets/blank.jpg')}
+        resizeMode="cover"
+        style={{
+          width: windowWidth,
+          height: windowHeight,
+          position: 'absolute',
+          flex: 1,
+          justifyContent: 'center',
+        }}
+      />
+
       <SafeAreaView
         style={{
           flex: 1,
-          marginLeft: 20,
-          marginRight: 20,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <View
-          style={{
-            borderColor: 'blue',
-            width: '95%',
-            borderRadius: 5,
-            borderWidth: 5,
-          }}>
-          <Text
-            style={{
-              marginTop: 40,
-              paddingLeft: 50,
-              fontSize: 24,
-              fontWeight: '800',
-            }}>
-            Authorization
-          </Text>
-          <View
-            style={{
-              marginTop: 20,
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingLeft: 10,
-              marginRight: 10,
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{fontWeight: 'bold', fontSize: 16}}>Login</Text>
-            <TextInput
-              style={[
-                {
-                  paddingLeft: 8,
-                  fontSize: 13,
-                  height: 45,
+        <TextSvg style={{marginTop: 99}} />
 
-                  borderRadius: 10,
-                  width: 230,
-                  color: '#000',
-                  backgroundColor: '#D9D9D9',
-                },
-              ]}
-              onChangeText={val => seTwalletKeys({...walletKeys, sk: val})}
-              value={walletKeys.sk}
-              //secureTextEntry={passwordInputSecure}
-              placeholderTextColor={'#000000'}
-              placeholder={''}
-            />
-          </View>
-
-          <View
+        <View style={{flex: 1, justifyContent: 'flex-end'}}>
+          <TouchableOpacity
+            onPress={() => signin()}
             style={{
-              marginTop: 20,
-              marginBottom: 30,
-              flexDirection: 'row',
-              paddingLeft: 10,
-              marginRight: 10,
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontWeight: 'bold', fontSize: 16}}>Password</Text>
-            <TextInput
-              style={[
-                {
-                  paddingLeft: 8,
-                  fontSize: 13,
-                  height: 45,
-
-                  borderRadius: 10,
-                  width: 230,
-                  color: '#000',
-                  backgroundColor: '#D9D9D9',
-                },
-              ]}
-              onChangeText={val => seTwalletKeys({...walletKeys, sk: val})}
-              value={walletKeys.sk}
-              //secureTextEntry={passwordInputSecure}
-              placeholderTextColor={'#000000'}
-              placeholder={''}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
+              marginTop: 50,
+              borderRadius: 13,
               width: '100%',
-              marginBottom: 10,
+              padding: 5,
+              backgroundColor: '#32A7E2',
+              width: 335,
+              height: 55,
+              marginLeft: 20,
+              marginRight: 20,
             }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('MainScreen')}
+            <Text
               style={{
-                borderRadius: 10,
-                width: '50%',
-                padding: 5,
-                backgroundColor: '#E4B062',
+                fontWeight: '500',
+                color: '#FFFFFF',
+                padding: 10,
+                justifyContent: 'center',
+                fontSize: 18,
+                textAlign: 'center',
               }}>
-              <Text style={{fontWeight: '900', textAlign: 'center'}}>
-                Submit
-              </Text>
-            </TouchableOpacity>
-          </View>
+              Войти
+            </Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </Fragment>

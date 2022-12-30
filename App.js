@@ -1,23 +1,30 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DarkTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from './src/screens/LoginScreen';
-import MainScreen from './src/screens/MainScreen';
-import WriterScreen from './src/screens/WriterScreen';
 
-const Stack = createNativeStackNavigator();
+import {
+  MD3LightTheme as DefaultTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
+import MainScreens from './src/navigation/MainScreens';
+import AuthState from './src/context/auth/AuthState';
 
 function App() {
+  const theme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: 'tomato',
+      secondary: 'yellow',
+    },
+  };
+  console.log('DarkTheme: ', DarkTheme);
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{headerShown: false}}
-        initialRouteName="LoginScreen">
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="MainScreen" component={MainScreen} />
-        <Stack.Screen name="WriterScreen" component={WriterScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider theme={DarkTheme}>
+      <AuthState>
+        <MainScreens />
+      </AuthState>
+    </PaperProvider>
   );
 }
 

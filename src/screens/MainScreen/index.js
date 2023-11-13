@@ -1,77 +1,53 @@
-import React, {Fragment, useState} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
-import AppBarLogin from '../../components/AppBarLogin';
-import AppBarMain from '../../components/AppBarMain';
+import React, {Fragment} from 'react';
+import {View, Text, SafeAreaView, StyleSheet} from 'react-native';
+import AppBarMain from '../../components/AppBarHeader';
+import AppBarFooter from '../../components/AppBarFooter';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 const MainScreen = ({navigation}) => {
-  const first = {
-    name: 'Autor: Leanne Graham',
-    company: 'Company: Romaguera-Crona',
-    title:
-      'Title:sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-  };
-  const second = {
-    name: 'Autor: Leanne Graham',
-    company: 'Company: Romaguera-Crona',
-    title:
-      'Title:sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-  };
   return (
     <Fragment>
       <AppBarMain />
-      <SafeAreaView
-        style={{
-          flex: 1,
-          marginLeft: 20,
-          marginRight: 20,
-          marginTop: 10,
-          alignItems: 'center',
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('WriterScreen', {item: first})}
+      <SafeAreaView style={styles.container}>
+        <Text style={{paddingBottom: 10, fontSize: 20}}>Body</Text>
+        <View
           style={{
-            borderRadius: 10,
             width: '100%',
-            padding: 5,
-            borderColor: 'blue',
-            borderWidth: 5,
+            height: 30,
           }}>
-          <Text style={{fontWeight: '900'}}>{first.name}</Text>
-          <Text style={{fontWeight: '900', marginTop: 20}}>
-            {first.company}
-          </Text>
-          <Text style={{fontWeight: '900', marginTop: 20, marginBottom: 20}}>
-            {first.title}
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('WriterScreen', {item: second})}
+          <Button backgr={'#1255CC'} text={'TITLE'} />
+        </View>
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <View
           style={{
-            marginTop: 10,
-            borderRadius: 10,
-            width: '100%',
-            padding: 5,
-            borderColor: 'blue',
-            borderWidth: 5,
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}>
-          <Text style={{fontWeight: '900'}}>{second.name}</Text>
-          <Text style={{fontWeight: '900', marginTop: 20}}>
-            {second.company}
-          </Text>
-          <Text style={{fontWeight: '900', marginTop: 20, marginBottom: 20}}>
-            {second.title}
-          </Text>
-        </TouchableOpacity>
+          <Button backgr={'#1255CC'} text={'RESET'} />
+          <View style={{width: 20}} />
+          <Button backgr={'#1255CC'} text={'SUBMIT'} />
+        </View>
       </SafeAreaView>
+      <AppBarFooter />
     </Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F4CCCC',
+  },
+});
 
 export default MainScreen;
